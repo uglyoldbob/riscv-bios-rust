@@ -7,5 +7,5 @@ add_custom_target(
     COMMAND cargo build --release
     COMMAND cp -u target/riscv32ima-unknown-none-elf/release/bios ./bios
     COMMAND rust-objcopy -O binary ./bios ./combios
-    COMMAND xxd -ps -c 1 ./combios ./combios.dat
+    COMMAND xxd -ps -c 4 ./combios ./combios.dat
 )

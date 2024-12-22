@@ -7,15 +7,6 @@ MEMORY
 
 SECTIONS
 {
-  .vector_table :
-  {
-    LONG(0x2007ffff);
-    LONG(_start);
-    . = ALIGN(4);
-    KEEP(*(.isr_vector)) /* Startup code */
-    . = ALIGN(4);
-  } > bios
-
   .text :
   {
     KEEP(*(.multiboot));
@@ -25,9 +16,19 @@ SECTIONS
     *(.got);
     *(.got.plt);
   } > bios
-  .rodata : { *(.rodata) } > flash
-  .rela : { *(.rela.dyn); } > flash
-  .strtab : { *(.strtab); } > flash
+
+  .vector_table :
+  {
+    LONG(0x2007ffff);
+    LONG(_start);
+    . = ALIGN(4);
+    KEEP(*(.isr_vector)) /* Startup code */
+    . = ALIGN(4);
+  } > bios
+
+  .rodata : { *(.rodata) } > bios
+  .rela : { *(.rela.dyn); } > bios
+  .strtab : { *(.strtab); } > bios
   RAMLOAD = .;
   .strings : {
     *(.dynstr);
