@@ -5,4 +5,5 @@ CMakeFiles/*
 Makefile
 bios
 combios
+combios.dat
 *.cmake
