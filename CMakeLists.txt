@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.22)
+project(bios)
+
+add_custom_target(
+    bios
+    BYPRODUCTS ./bios ./combios
+    COMMAND cargo build --release
+    COMMAND cp -u target/riscv32ima-unknown-none-elf/release/bios ./bios
+    COMMAND rust-objcopy -O binary ./bios ./combios
+)
